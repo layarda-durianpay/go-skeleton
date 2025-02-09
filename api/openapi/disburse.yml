@@ -1,0 +1,65 @@
+openapi: "3.0.0"
+info:
+  title: GO Skeleton Disbursement
+  version: 0.1.0
+  contact:
+    name: Layarda Putra Angkasa
+    email: layarda.putra@durian.money
+servers:
+  - url: https://{hostname}/api
+    variables:
+        hostname:
+          default: localhost
+  
+paths:
+  /disburse:
+    post:
+      operationId: disburse
+      requestBody:
+        $ref: '#/components/requestBodies/PostDisburseBody'
+      responses:
+        "201":
+          description: Disburse Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatedResponse"
+        "400":
+          $ref: "./shared_components.yml#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "./shared_components.yml#/components/responses/NotFoundRequest"
+        default:
+          $ref: "./shared_components.yml#/components/responses/UnexpectedErrorRequest"
+
+components:
+  requestBodies:
+    PostDisburseBody:
+      description: A JSON object containing information for disburse
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PostDisburseRequest'
+
+  schemas:
+    PostDisburseRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: number
+          example: 10000
+
+    # response
+    CreatedResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "Success Process your disburse."
+
+
+   

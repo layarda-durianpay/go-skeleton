@@ -1,0 +1,17 @@
+.idea/
+**/coverage/*
+*.code-workspace
+
+coverage
+
+application.yaml
+application.yml
+**/application.yml
+
+**/pgdata/*
+*.log
+*.pid
+*.exec
+
+.DS_Store
+.vscode

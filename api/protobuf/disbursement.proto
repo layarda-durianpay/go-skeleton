@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "./protogen"; 
+
+import "google/protobuf/empty.proto";
+
+service DisbursementService {
+    rpc Disburse(DisburseRequest) returns (google.protobuf.Empty) {}
+}
+
+message DisburseRequest {
+    float amount = 1;
+}

@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS disbursements(
+    id UUID NOT NULL PRIMARY KEY,
+    amount DECIMAL NOT NULL
+);

@@ -1,0 +1,58 @@
+# shared components for each openapi yml
+
+components:
+  parameters:
+  responses:
+    BadRequestResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestError"
+    NotFoundRequest:
+      description: Not Found Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/NotFoundError"
+    UnexpectedErrorRequest:
+      description: unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    # error response
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: message error description
+        error_code:
+          type: string
+          example: "DPAY_INTERNAL_ERROR"
+          description: durianpay error code
+        request_id:
+          type: string
+          description: durianpay request_id for reconciliation
+    BadRequestError:
+      allOf:
+        - $ref: '#/components/schemas/Error'
+        - type: object
+          properties:
+            error_code:
+              example: "DPAY_BAD_REQUEST"
+              type: string
+              description: durianpay error code
+    NotFoundError:
+      allOf:
+        - $ref: '#/components/schemas/Error'
+        - type: object
+          properties:
+            error_code:
+              example: "DPAY_NOT_FOUND"
+              type: string
+              description: durianpay error code
